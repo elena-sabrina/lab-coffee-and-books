@@ -6,18 +6,16 @@ const createError = require("http-errors");
 const logger = require("morgan");
 const sassMiddleware = require("node-sass-middleware");
 const serveFavicon = require("serve-favicon");
+const hbs = require("hbs");
 
 //REQUIRE USER MODEL
 const Place = require("./models/place");
-
-//REQUIRE ROUTES
-
-const indexRouter = require("./routes/index");
 
 const app = express();
 
 app.set("views", join(__dirname, "views"));
 app.set("view engine", "hbs");
+//hbs.registerPartials(path.join(__dirname, "views/partials"));
 
 app.use(serveFavicon(join(__dirname, "public/images", "favicon.ico")));
 app.use(
@@ -34,9 +32,14 @@ app.use(express.static(join(__dirname, "public")));
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 
-//Mount routers
+//REQUIRE ROUTES
 
+const indexRouter = require("./routes/index");
+const placesRouter = require("./routes/places");
+
+//MOUNT ROUTES
 app.use("/", indexRouter);
+app.use("/places", placesRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {

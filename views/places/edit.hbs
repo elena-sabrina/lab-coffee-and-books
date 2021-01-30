@@ -1,0 +1,14 @@
+<h2>Edit {{name}}</h2>
+
+<form method="POST" action="/places/{{places._id}}">
+    <label for="input-name">Name</label>
+    <input type="text" id="input-name" name="name" placeholder="{{ places.name }}" required/>
+
+    <label for="input-type">Type</label>
+    <select name="type" id="input-type" required>
+        <option value="{ places.type }}" selected disabled> Type </option> <!-- Display placeholder value-->
+        <option value="coffee_shop">Book</option>
+        <option value="bookstore">Video</option>
+  </select>
+    <button>Submit</button>
+</form>

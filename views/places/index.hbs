@@ -1,0 +1,29 @@
+<div class="header">
+    <h2>Places List</h2>
+    <button class="primary">    
+    <a href="/places/create">Create a Places</a>
+    </button> 
+</div>
+
+{{#each places}}
+
+<div class="places-box">
+    <h3>{{ name }}</h3>
+    <p>{{ type }}</p>
+    <button>
+     <a href="/places/{{_id}}">More about {{ name }}</a>  
+    </button> 
+    </br>
+
+    <button>
+     <a href="/places/{{_id}}/edit">Edit {{ name }}</a>  
+    </button> 
+    
+    <form method= "POST" action="/places/{{_id}}/delete">
+    <label for="delete-places" hidden>Delete Place</label>
+     <button>Delete</button>
+    </form>
+</div>  
+
+
+{{/each}}
